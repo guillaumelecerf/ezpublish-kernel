@@ -137,6 +137,9 @@ Changes affecting version compatibility with former or future versions.
 * `eZ\Publish\API\Repository\UserService::loadUserGroupsOfUser()` signature has changed, parameters `$offset = 0`
   and `$limit = 10` are added. No way is provided to return all user groups, pagination should be used if full
   result set is desired.
+  
+* SiteAccess service (`ezpublish.siteaccess`) is not synchronized any more.
+  Synchronized services are deprecated as of Symfony 2.7.
 
 ## Deprecations
 
