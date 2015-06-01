@@ -351,7 +351,7 @@ class IOServiceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @depends testCreateBinaryFile
+     * @depends testCreateBinaryFile+
      * @covers IOService \eZ\Publish\Core\IO\IOService::getMimeType()
      */
     public function testGetMimeType( BinaryFile $binaryFile )
@@ -387,6 +387,24 @@ class IOServiceTest extends PHPUnit_Framework_TestCase
             ->with( $this->equalTo( $this->getPrefixedUri( $binaryFile->id ) ) );
 
         $this->getIOService()->deleteBinaryFile( $binaryFile );
+    }
+
+    public function testDelete()
+    {
+        $id = "some/directory";
+        $spiId = $this->getPrefixedUri( $id );
+
+        $this->binarydataHandlerMock
+            ->expects( $this->once() )
+            ->method( 'deleteDirectory' )
+            ->with( $spiId );
+
+        $this->metadataHandlerMock
+            ->expects( $this->once() )
+            ->method( 'deleteDirectory' )
+            ->with( $spiId );
+
+        $this->getIOService()->deleteDirectory( 'some/directory' );
     }
 
     /**
